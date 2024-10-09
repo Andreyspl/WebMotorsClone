@@ -69,7 +69,7 @@
                             @if($ad->photos)
                                 <img src="{{ Storage::url(json_decode($ad->photos)[0]) }}" class="card-img-top" alt="Foto do anúncio">
                             @else
-                                <img src="/images/default-car.jpg" class="card-img-top" alt="Foto não disponível">
+                                <img src="{{ asset('images/default-car.png') }}" class="card-img-top" alt="Foto não disponível">
                             @endif
                             <div class="card-body">
                                 <h5 class="ad-card-title">{{ $ad->title }}</h5>

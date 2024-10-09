@@ -22,15 +22,15 @@
         </div>
         <div class="form-group mt-3">
             <label for="price">Preço</label>
-            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+            <input type="text" class="form-control" id="price" name="price" required oninput="validatePrice(this)">
         </div>
         <div class="form-group mt-3">
             <label for="mileage">Quilometragem</label>
-            <input type="number" class="form-control" id="mileage" name="mileage" required>
+            <input type="text" class="form-control" id="mileage" name="mileage" required oninput="validateMileage(this)">
         </div>
         <div class="form-group mt-3">
             <label for="year">Ano</label>
-            <input type="number" class="form-control" id="year" name="year" required>
+            <input type="text" class="form-control" id="year" name="year" required oninput="validateYear(this)">
         </div>
         <div class="form-group mt-3">
             <label for="license_plate_start">Início da Placa</label>
@@ -61,4 +61,36 @@
         <button type="submit" class="btn btn-primary mt-4">Criar Anúncio</button>
     </form>
 </div>
+
+<script>
+    function validatePrice(input) {
+        let value = input.value.replace(',', '.');
+        value = value.replace(/[^\d.]/g, '');
+        const parts = value.split('.');
+        if (parts.length > 2) {
+            value = parts[0] + '.' + parts[1];
+        }
+        if (parts[1] && parts[1].length > 2) {
+            value = parts[0] + '.' + parts[1].substring(0, 2);
+        }
+        input.value = value.replace('.', ',');
+    }
+
+    function validateMileage(input) {
+        let value = input.value.replace(',', '.');
+        value = value.replace(/[^\d.]/g, '');
+        const parts = value.split('.');
+        if (parts.length > 2) {
+            value = parts[0] + '.' + parts[1];
+        }
+        if (parts[1] && parts[1].length > 2) {
+            value = parts[0] + '.' + parts[1].substring(0, 2);
+        }
+        input.value = value.replace('.', ',');
+    }
+
+    function validateYear(input) {
+        input.value = input.value.replace(/[^0-9]/g, '').substring(0, 4);
+    }
+</script>
 @endsection
